@@ -2,6 +2,9 @@
 
 A modern, real-time telemetry dashboard for Unmanned Surface Vehicles (USV) built with Flask and WebSocket technology.
 
+![dashboard](https://github.com/kevinbdx35/USV-telemetry/blob/main/img.png?raw=true)
+
+
 ## Features
 
 ### 🚢 Real-time Telemetry
