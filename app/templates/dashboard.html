@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Status Cards -->
+    <div class="col-12">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="card status-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="status-icon bg-success">
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="card-title mb-0">Battery</h6>
+                                <h4 class="mb-0" id="battery-level">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card status-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="status-icon bg-info">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="card-title mb-0">Speed</h6>
+                                <h4 class="mb-0" id="speed">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card status-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="status-icon bg-warning">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="card-title mb-0">Temperature</h6>
+                                <h4 class="mb-0" id="temperature">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card status-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="status-icon bg-primary">
+                                <i class="fas fa-compass"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="card-title mb-0">Heading</h6>
+                                <h4 class="mb-0" id="heading">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map and Camera -->
+    <div class="col-lg-8">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-map-marked-alt me-2"></i>USV Position & Path
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-video me-2"></i>Live Camera Feed
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div id="camera-container">
+                    <div id="camera-status" class="text-center p-4">
+                        <i class="fas fa-camera fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Camera feed unavailable</p>
+                        <button class="btn btn-outline-primary btn-sm" onclick="connectCamera()">
+                            <i class="fas fa-play me-1"></i>Connect Camera
+                        </button>
+                    </div>
+                    <video id="camera-feed" class="w-100" style="display: none;" autoplay muted>
+                        Your browser does not support video streaming
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sensor Data -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-line me-2"></i>Sensor Readings
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="sensorChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Status -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-tasks me-2"></i>Mission Status
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mission-info">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <strong>Mode:</strong>
+                            <span id="mission-mode" class="badge bg-primary ms-2">--</span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Status:</strong>
+                            <span id="mission-status" class="badge bg-success ms-2">--</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <strong>Wind Speed:</strong>
+                            <span id="wind-speed">--</span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Water Temp:</strong>
+                            <span id="water-temp">--</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <strong>Target Position:</strong>
+                            <div id="target-position" class="text-muted">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
